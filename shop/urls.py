@@ -20,7 +20,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('myshop.urls', namespace='myshop'))
+    url(r'^', include('myshop.urls', namespace='myshop')),
+    url(r'^order/', include('orders.urls', namespace='orders' )),
 ]
 
 if settings.DEBUG:

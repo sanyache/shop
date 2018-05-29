@@ -1,6 +1,6 @@
 {% extends 'myshop/base.html' %}
 {% load static %}
-
+{% load myshop_extras %}
 {% block title %}
   {% if category %} {{ category.name }} {% else %} Сторінка товарів{% endif %}
 {% endblock %}
@@ -15,22 +15,34 @@
       {% for cat in categories %}
         <li>
           <a href="{% url 'myshop:ProductListByCategory' cat.slug %}">{{ cat.name }}</a>
+          <ul> {% for brand in cat.brands|in_category:cat %}
+            <li>
+              <a href="{% url 'myshop:ProductListByBrand' cat.slug brand.slug %}">{{ brand.name }}</a>
+            </li>
+               {% endfor %}
+          </ul>
         </li>
       {% endfor %}
     </ul>
   </div>
-  <div id="main" class="product_list col-sm-9">
+  <div id="main" class="product_list col-md-9">
     <h1>{% if category %}{{ category.name }}{% else %}Товари{% endif %}</h1>
+  </div>
     <div class="items row">
       {% for product in products %}
-        <div class="item col-sm-4">
-          <a href="{{ product.get_absolute_url }}">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image-02.jpg' %}{% endif %}" class="img-responsive">
+        <div class="item col-md-3">
+          <div class="card border-secondary" style="width: 18rem;">
+            <a href="{{ product.get_absolute_url }}">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image-02.jpg' %}{% endif %}" class="card-img-top img-responsive" width="250" height="300">
           </a>
-          <a href="{% url 'myshop:ProductDetail' product.id product.slug %}">{{ product.name }}</a><br>
-          {{ product.price }} грн.
+            <div class="card-body">
+              <a href="{% url 'myshop:ProductDetail' product.id product.slug %}">{{ product.name }}</a><br>
+              {{ product.price }} грн.
+            </div>
+          </div>
+
         </div>
       {% endfor %}
     </div>
-</div>
+
 {% endblock %}

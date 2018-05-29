@@ -18,6 +18,21 @@
         {{ product.description | linebreaks}}
       </span>
     </div>
+    <div>
+      <form id="form_buying_product" class="form-inline" action="{% url 'orders:basket_adding' %}">{% csrf_token %}
+        <div class="form-group">
+          <input type="number" class="form-control" id="number" name="number">
+        </div>
+        <div class="form-group">
+            <button type="submit" id="submit_btn" class="btn btn-success btn-buy"
+                    data-product_id = "{{ product.id }}"
+                    data-name = "{{ product.name }}"
+                    data-price = "{{ product.price }}"
+            >
+              Купити</button>
+        </div>
+      </form>
+    </div>
   </div>
 {% endblock %}
 

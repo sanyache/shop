@@ -2,12 +2,16 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, Brand
 
 # Register your models here.
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug']
+    list_display = ['name', 'slug',]
+    prepopulated_fields = {'slug': ('name', )}
+
+class BrandAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug', 'category']
     prepopulated_fields = {'slug': ('name', )}
 
 class ProductAdmin(admin.ModelAdmin):
@@ -16,4 +20,5 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ['price', 'stock', 'available']
     prepopulated_fields = {'slug': ('name', )}
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Brand, BrandAdmin)
 admin.site.register(Product, ProductAdmin)

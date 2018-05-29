@@ -21,8 +21,23 @@ class Category(models.Model):
     def __unicode__(self):
         return u"%s"%(self.name)
 
+class Brand(models.Model):
+    name = models.CharField(max_length=200, db_index=True, blank=True, null=True, default=None)
+    slug = models.SlugField(max_length=200, db_index=True, unique=True, blank=True, null=True, default=None)
+    category = models.ForeignKey(Category, related_name='brands', verbose_name='Категорія')
+    class Meta:
+        ordering = ['name']
+        verbose_name = 'Бренд'
+        verbose_name_plural = 'Бренди'
+
+
+    def __unicode__(self):
+        return u"%s"%(self.name)
+
+
 class Product(models.Model):
-    category = models.ForeignKey(Category, related_name='products', verbose_name='Категорія')
+    category = models.ForeignKey(Category, related_name='products', verbose_name='Категорія', blank=True, null=True, default=None)
+    brand = models.ForeignKey(Brand, related_name='products', verbose_name='Бренд', blank=True, null=True, default=None)
     name = models.CharField(max_length=200, db_index=True, verbose_name='Назва')
     slug = models.SlugField(max_length=200, db_index=True)
     image = models.ImageField(upload_to='products/%Y/%m/%d/', blank=True, verbose_name='Зображення товару')

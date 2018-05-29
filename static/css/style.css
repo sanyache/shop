@@ -1,0 +1,30 @@
+
+.basket-container{
+    position: relative;
+    width: 400px;
+    padding: 15px 10px;
+}
+
+.basket-items{
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    background-color: white;
+    z-index: 10;
+    padding: 10px;
+}
+
+.card{
+    margin-left:5px;
+
+    background-color: lavender;
+}
+.card-body{
+    font-size:24px;
+}
+.item{
+
+    margin-right:20px;
+    margin-left:20px;
+    margin-top:10px;
+}

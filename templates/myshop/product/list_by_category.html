@@ -10,11 +10,11 @@
     <h3>Категории</h3>
     <ul>
       <li {% if not category %} class="selected" {% endif %}>
-        <a href="{% url 'myshop:ProductList' %}">Всі</a>
+        <a href="{% url 'myshop:ProductList' %}">Всі </a>
       </li>
-      {% for cat in categories %}
+      {% for brand in brands %}
         <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
-          <a href="#">{{ cat.name }}</a>
+          <a href="{% url 'myshop:ProductListByBrand' category.slug brand.slug %}">{{ brand.name }}Brand</a>
         </li>
       {% endfor %}
     </ul>
@@ -25,7 +25,7 @@
       {% for product in products %}
         <div class="item col-sm-4">
           <a href="{{ product.get_absolute_url }}">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image-02.jpg' %}{% endif %}" class="img-responsive">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image-02.jpg' %}{% endif %}" class="img-responsive" width="200" height="250">
           </a>
           <a href="{% url 'myshop:ProductDetail' product.id product.slug %}">{{ product.name }}</a><br>
           {{ product.price }} грн.

@@ -1,0 +1,65 @@
+{% load myshop_extras %}
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2687b4;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">Hidden brand</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'myshop:ProductList' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Категорії
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+          {% for cat in categories %}
+          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">{{ cat.name }}</a>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{% url 'myshop:ProductListByCategory' cat.slug %}">Всі</a></li>
+              {% for brand in cat.brands|in_category:cat %}
+              <li><a class="dropdown-item" href="{% url 'myshop:ProductListByBrand' cat.slug brand.slug %}">{{ brand.name }}</a></li>
+              {% endfor %}
+
+
+            </ul>
+          </li>
+            {% endfor %}
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+    <div class="nav navbar-nav navbar-right">
+           <div class="basket-container">
+               <a href="" class="basket">Корзина<span id="basket_total_nmb">
+                   {% if products_total_nmb %}
+                    ({{ products_total_nmb }})
+                   {% else %}
+                    (0)
+                   {% endif %}
+               </span></a>
+                <div class="basket-items d-none">
+                    <ul >
+                        {% for product_in_basket in products_in_basket %}
+                            <li>
+                                {{ product_in_basket.product.name }} {{ product_in_basket.nmb }} шт. по {{ product_in_basket.price_per_item }} грн.
+                                <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">x</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+           </div>
+    </div>
+</nav>

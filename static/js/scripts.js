@@ -76,4 +76,23 @@ $(document).ready(function(){
       
         return false;
       });
+
+    function calculatingBasketAmout(){
+        var total_order_amount = 0;
+        var data = $('.total-product-in-basket-amount');
+        for(var i=0; i < data.length; ++i){
+            total_order_amount += parseFloat(data[i].innerText);
+        }
+        $('#total_order_amount').text(total_order_amount.toFixed(2));
+    }  
+    $(document).on('change', ".product-in-basket-nmb", function(){
+        var current_nmb = parseInt($(this).val());
+        var current_tr = $(this).closest('tr');
+        var current_price = parseFloat(current_tr.find('.product-in-basket-price-per-item').text()).toFixed(2);
+        total_amount = current_nmb * current_price ;
+        current_tr.find('.total-product-in-basket-amount').text(total_amount);
+        calculatingBasketAmout();
+        console.log(total_amount);
+    });
+    calculatingBasketAmout();
 });

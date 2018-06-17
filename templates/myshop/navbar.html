@@ -61,5 +61,10 @@
                     </ul>
                 </div>
            </div>
+           <div>
+               {% if products_total_nmb %}
+               <a href="{% url 'orders:checkout' %}" class="basket">Оформити замовленя</a>
+               {% endif %}
+           </div>
     </div>
 </nav>

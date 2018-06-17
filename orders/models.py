@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from myshop.models import Product
+from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
 # Create your models here.
@@ -20,6 +21,7 @@ class Status(models.Model):
         verbose_name_plural = 'Статуси замовлення'
 
 class Order(models.Model):
+    user = models.ForeignKey(User, blank=True, null=True, default=None)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     customer_name = models.CharField(max_length=64, blank=True, null=True, default=None)
     customer_email = models.EmailField(blank=True, null=True, default=None)
@@ -62,7 +64,7 @@ class ProductInOrder(models.Model):
     def save(self, *args, **kwargs):
         price_per_item = self.product.price
         self.price_per_item = price_per_item
-        self.total_price = self.nmb * price_per_item
+        self.total_price = int(self.nmb) * price_per_item
 
         super(ProductInOrder, self).save(*args, **kwargs)
 

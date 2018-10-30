@@ -3,17 +3,28 @@
 
 
 {% block content %}
-  <div class="container">
+  <div class="container products">
     <div class="items row">
       {% for product in products %}
-        <div class="item col-sm-4">
-          <a href="{{ product.get_absolute_url }}">
-            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image-02.jpg' %}{% endif %}" class="img-responsive" width="200" height="250">
-          </a>
-          <a href="{% url 'myshop:ProductDetail' product.id product.slug %}">{{ product.name }}</a><br>
-          {{ product.price }} грн.
+        <div class="item col-md-3">
+          <div class="card border-secondary" style="width: 18rem;">
+            <a href="{{ product.get_absolute_url }}">
+              <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image-02.jpg' %}{% endif %}" class="card-img-top img-responsive" width="250" height="300">
+            </a>
+            <div class="card-body">
+              <a href="{% url 'myshop:ProductDetail' product.id product.slug %}">{{ product.name }}</a><br>
+              {{ product.price }} грн.
+            </div>
+          </div>
+
         </div>
       {% endfor %}
     </div>
   </div>
+
+  {% if products.has_next %}
+    <div class="text-center">
+      <a class="btn btn-success load-more" href="?page={{ products.next_page_number }}" data-pages={{paginator.num_pages}} >Завантажити<br>ще </a>
+    </div>
+  {% endif %}
 {% endblock %}

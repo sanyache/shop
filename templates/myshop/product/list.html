@@ -28,6 +28,7 @@
   <div id="main" class="product_list col-md-9">
     <h1>{% if category %}{{ category.name }}{% else %}Товари{% endif %}</h1>
   </div>
+  <div class="products">
     <div class="items row">
       {% for product in products %}
         <div class="item col-md-3">
@@ -44,5 +45,11 @@
         </div>
       {% endfor %}
     </div>
+  </div>
+  {% if products.has_next %}
+    <div class="text-center">
+    <a class="btn btn-success load-more" href="?page={{ products.next_page_number }}" data-pages={{paginator.num_pages}} >Завантажити<br>ще </a>
+    </div>
+  {% endif %}
 
 {% endblock %}

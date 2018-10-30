@@ -7,8 +7,12 @@ from .models import Status, Order, ProductInOrder, ProductInBasket
 # Register your models here.
 
 class ProductInOrderInline(admin.TabularInline):
+
     model = ProductInOrder
+    fields = ['product', 'nmb', 'price_per_item', 'total_price', 'is_active']
     extra = 0
+
+
 
 class StatusAdmin (admin.ModelAdmin):
     list_display = [field.name for field in Status._meta.fields]
@@ -24,10 +28,14 @@ class OrderAdmin (admin.ModelAdmin):
         model = Order
 
 class ProductInOrderAdmin (admin.ModelAdmin):
-    list_display = [field.name for field in ProductInOrder._meta.fields]
-
+    list_display = ['order', 'product', 'nmb',  'get_stock', 'price_per_item', 'total_price', 'is_active']
+    
+    
     class Meta:
         model = ProductInOrder
+    def get_stock(self, obj):
+        return obj.product.stock
+
 
 class ProductInBasketAdmin (admin.ModelAdmin):
     list_display = [field.name for field in ProductInBasket._meta.fields]

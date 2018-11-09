@@ -26,6 +26,22 @@ $(document).ready(function(){
          });
     
     }
+    function loadPage(){
+        $('a.load-page').click(function(event){
+          var link = $(this).attr('href')
+          console.log(link);
+          $.ajax({
+            'url': link,
+            'dataType': 'json',
+            'type': 'get',
+            'success': function(data, status, xhr){ 
+                $("#order-table tbody").html(data.html_form);
+            
+            }
+        });
+        return false;
+        });
+      }
 
     function basketUpdating(product_id, nmb, is_delete){
         var data = {};
@@ -126,8 +142,44 @@ $(document).ready(function(){
         total_amount = current_nmb * current_price ;
         current_tr.find('.total-product-in-basket-amount').text(total_amount);
         calculatingBasketAmout();
-        console.log(total_amount);
+        
     });
-    calculatingBasketAmout();
+    function calculatingOrderAmout(){
+        var total_order_amount = 0;
+        var data = $('.total-product-in-order-amount');
+        for(var i=0; i < data.length; ++i){
+            var id ='is-active_'+ data[i].getAttribute('data-id');
+            check = document.getElementById(id).checked;
+            if (check == true) {
+                total_order_amount += parseFloat(data[i].innerText);
+             }    
+        }
+        document.getElementById('id_total_price').value = total_order_amount;
+        //total_price.text(total_order_amount.toFixed(2));
+    }  
+    $(document).on('change', ".product-in-order-nmb", function(){
+        var current_nmb = parseInt($(this).val());
+        var current_tr = $(this).closest('tr');
+        var current_price = parseFloat(current_tr.find('.product-in-order-price-per-item').text()).toFixed(2);
+        total_amount = current_nmb * current_price ;
+        current_tr.find('.total-product-in-order-amount').text(total_amount);
+        calculatingOrderAmout();
+        
+    });
+    $(document).on('change', ".checkbox", function changeAction(){
+        var current_nmb = parseInt($(this).val());
+        var current_tr = $(this).closest('tr');
+        var current_price = parseFloat(current_tr.find('.product-in-order-price-per-item').text()).toFixed(2);
+        total_amount = current_nmb * current_price ;
+        current_tr.find('.total-product-in-order-amount').text(total_amount);
+        calculatingOrderAmout();
+        
+    });
+    
     loadMore();
+    loadPage();
+    calculatingBasketAmout();
+    calculatingOrderAmout();
+    
+    
 });

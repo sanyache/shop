@@ -1,0 +1,44 @@
+{% extends 'myshop/base.html' %}
+{% load static %}
+{% load myshop_extras %}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+    <form method="post">
+
+        {% csrf_token %}
+        <div class="form-group">
+            {% include 'myshop/product/includes/partial_form.html' %}
+        </div>
+        <table class="table" id="order-table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Продукт</th>
+                    <th>На складі</th>
+                    <th>Кількість</th>
+                    <th>Ціна</th>
+                    <th>Загальна вартість</th>
+                    <th>Активний</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% include 'myshop/order/includes/partial_order_product_list.html' %}
+            </tbody>
+
+        </table>
+        <button data-url="{% url 'orders:product_add' order.id %}" class="js-create-order">Добавити</button>
+        <button type="submit" class="btn btn-success">Відправити</button>
+
+    </form>
+<!-- Modal window -->
+    <div class="modal fade" id="modal-order">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

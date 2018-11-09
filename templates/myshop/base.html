@@ -5,14 +5,43 @@
   <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/typeahead.css' %}">
+      {% block extra_css %}{% endblock extra_css %}
   </head>
   <body>
 
    <nav class="navbar navbar-expand-sm navbar-top navbar-light bg-light">
-        Тел: 80679209415     <a class="btn btn-primary" href="{% url 'myshop:CreateProduct' %}" >Добавити товар</a>
+       <div class="collapse navbar-collapse">
+           Тел: 80679209415
+       </div>
+       <div class="nav navbar-nav navbar-right">
+       <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+
+                <li class="nav-item dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-user"></i> {{user.username}}<span class="caret"></span> </a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'account:my_account' %}">Мій акаунт</a></li>
+                        <li><a href="">Змінити пароль</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'account:logout' %}">Вийти</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+                {% else %}
+                <li class="nav-item"><a href="{% url 'account:signup' %}">Реєстрація</a></li>
+                <li class="nav-item"><a href="{% url 'account:login' %}"><i class="fas fa-sign-in-alt"></i></a> </li>
+
+            {% endif %}
+
+       </ul>
+       </div>
    </nav>
    {% include 'myshop/navbar.html' %}
 
@@ -56,6 +85,9 @@
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/order.js' %}"></script>
+    <script src="{% static 'js/typeahead.js' %}"></script>
+    {% block extra_js %}{% endblock extra_js %}
 
   </body>
 

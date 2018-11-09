@@ -10,14 +10,14 @@
     <h3>Категории</h3>
     <ul>
       <li {% if not category %} class="selected" {% endif %}>
-        <a href="{% url 'myshop:ProductList' %}">Всі</a>
+        <a href="{% url 'myshop:Stock' %}">Всі</a>
       </li>
       {% for cat in categories %}
         <li>
-          <a href="{% url 'myshop:ProductListByCategory' cat.slug %}">{{ cat.name }}</a>
+          <a href="{% url 'myshop:StockListByCategory' cat.slug %}" class="load-page">{{ cat.name }}</a>
           <ul> {% for brand in cat.brands|in_category:cat %}
             <li>
-              <a href="{% url 'myshop:ProductListByBrand' cat.slug brand.slug %}">{{ brand.name }}</a>
+              <a href="{% url 'myshop:StockListByBrand' cat.slug brand.slug %}" class="load-page">{{ brand.name }}</a>
             </li>
                {% endfor %}
           </ul>
@@ -25,5 +25,42 @@
       {% endfor %}
     </ul>
   </div>
-  
+    <form method="post" action="{% url 'myshop:search' %}"  id="search_product">
+        {% csrf_token %}
+        <input class="w3-input w3-border typeahead" name="search_product" id="search" type="text" value="" placeholder="Введіть назву">
+        <button type="submit" class="btn btn-primary" name="search_button" >Пошук</button>
+
+    </form>
+<br>
+<br>
+<table class="table" id="order-table">
+    <thead class="thead-inverse">
+        <tr>
+            <th>№</th>
+            <th>Назва</th>
+            <th>Категорія</th>
+            <th>Бренд</th>
+            <th>Ціна</th>
+            <th>На складі</th>
+            <th>Доступний</th>
+            <th>Створено</th>
+            <th>Оновлено</th>
+            <th>Дія</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% include 'myshop/product/includes/partial_stock_list.html' %}
+    </tbody>
+</table>
+<!-- Modal window -->
+    <div class="modal fade" id="modal-order">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
+{% block extra_js %}
+    <script src="{% static 'js/stock.js' %}"></script>
+{% endblock extra_js %}

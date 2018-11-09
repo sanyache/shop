@@ -5,17 +5,23 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" href="#">Hidden brand</a>
+
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'myshop:ProductList' %}">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'myshop:ProductList' %}">Головна <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Адмінка
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'myshop:CreateProduct' %}">Додати товар</a>
+          <a class="dropdown-item" href="{% url 'orders:order_list' %}">Замовлення</a>
+          <a class="dropdown-item" href="{% url 'myshop:Stock' %}">Склад</a>
+        </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+
+
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Категорії
@@ -43,7 +49,7 @@
   </div>
     <div class="nav navbar-nav navbar-right">
            <div class="basket-container">
-               <a href="" class="basket">Корзина<span id="basket_total_nmb">
+               <a href="" class="basket"><i class="fas fa-shopping-cart"></i><span id="basket_total_nmb">
                    {% if products_total_nmb %}
                     ({{ products_total_nmb }})
                    {% else %}

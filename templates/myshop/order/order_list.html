@@ -1,0 +1,45 @@
+{% extends 'myshop/base.html' %}
+{% load static %}
+{% load myshop_extras %}
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'orders:order_search' %}" id="search_order">
+        {% csrf_token %}
+        <input class="w3-input w3-border typeahead" name="search_order" id="search" type="text" value="" placeholder="Введіть номер телефону">
+        <button type="submit" class="btn btn-primary" name="search_button">Пошук</button>
+
+    </form>
+
+<br>
+<br>
+<table class="table" id="order-table">
+    <thead class="thead-inverse">
+        <tr>
+            <th>№</th>
+            <th>Замовник</th>
+            <th>Ім'я</th>
+            <th>Email</th>
+            <th>Телефон</th>
+            <th>Загальна вартість</th>
+            <th>Статус</th>
+            <th>Створено</th>
+            <th>Оновлено</th>
+            <th>Дія</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% include 'myshop/order/includes/partial_order_list.html' %}
+    </tbody>
+</table>
+<!-- Modal window -->
+    <div class="modal fade" id="modal-order">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <h3>Hello</h3>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

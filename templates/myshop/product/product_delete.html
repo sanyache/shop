@@ -1,0 +1,16 @@
+<form method="post" action="{% url 'myshop:ProductDelete' product.id product.slug %}" class="js-order-delete-form">
+  {% csrf_token %}
+  <div class="mod-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="mod-title">Видалення товар</h4>
+  </div>
+  <div class="mod-body">
+    <p class="lead">Ви впевнені у видаленні товару <strong></strong>?</p>
+  </div>
+  <div class="mod-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Скасувати</button>
+    <button type="submit" class="btn btn-danger">Видалити</button>
+  </div>
+</form>

@@ -1,0 +1,25 @@
+{% extends "myshop/base.html" %}
+{% load static  %}
+{% block title %}Реєстрація{% endblock title %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container">
+    <h2>Реєстрація</h2>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-primary">Створити акаунт</button>
+        <a href="{% url 'myshop:ProductList' %}" class="btn btn-default" role="button">Скасувати</a>
+    </form>
+    <div class="text-center">
+        вже є акаунт <a href="#">Log in</a>
+
+    </div>
+</div>
+
+
+{% endblock content %}

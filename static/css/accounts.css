@@ -1,0 +1,22 @@
+body{
+    background-image: url(../img/hip-square.png);
+}
+
+.logo a {
+    color: rgba(0,0,0,.9);
+}
+
+form{
+    width: 700px;
+    margin: 0 auto;
+    display: block;
+}
+
+label{
+    font-size: 20px;
+}
+
+input{
+    font-size: 18px !important;
+}
+

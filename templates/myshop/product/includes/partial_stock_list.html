@@ -1,0 +1,25 @@
+{% for product in products %}
+        <tr>
+            <td><a href="">{{ forloop.counter }}</a></td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.brand }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.available }}</td>
+            <td>{{ product.created }}</td>
+            <td>{{ product.updated }}</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Дія
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" >
+                        <li><a href="{% url 'myshop:ProductEdit' product.id product.slug %}">Редагувати</a></li>
+                        <li><a href="" class="btn btn-danger js-delete-order" data-url="{% url 'myshop:ProductDelete' product.id product.slug %}">Видалити</a></li>
+
+                    </ul>
+                </div>
+            </td>
+        </tr>
+{% endfor %}

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'accounts',
     'myshop',
     'orders',
 ]
@@ -127,6 +128,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-
+REGISTRATION_OPEN = True
+LOGOUT_REDIRECT_URL = 'myshop:ProductList'
+LOGIN_REDIRECT_URL = 'myshop:ProductList'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

@@ -1,0 +1,56 @@
+
+{% load static  %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock extra_css %}
+{% block title %}Мій акаунт {{ user.username }}{% endblock title %}
+{% block content %}
+ <br/>
+ <br/>
+ <form  action="{% url 'account:my_account' %}" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-blue " >
+    {% csrf_token %}
+    <h2 class="w3-center">Мій акакунт {{ user.username }}</h2>
+    <div class="w3-row w3-section">
+       <label class="col-sm-2" for="first_name">Ім'я</label>
+
+        <div class="w3-rest">
+            <input type="text" class="w3-input w3-border" id="first_name"  name="first_name" value="{{ user.first_name }}">
+        </div>
+
+    </div>
+    <div class="w3-row w3-section">
+        <label class="col-sm-2" for="last_name">Прізвище</label>
+        <div class="w3-rest">
+            <input type="text" class="w3-input w3-border" id="last_name" value="{{ user.last_name }}" name="last_name" >
+        </div>
+    </div>
+     <div class="w3-row w3-section">
+        <label class="col-sm-2" for="email">Поштова скринька</label>
+        <div class="w3-rest">
+            <input type="text" class="w3-input w3-border" id="email" value="{{ user.email }}" name="email" placeholder="">
+        </div>
+    </div>
+    <div class="w3-row w3-section">
+        <label class="col-sm-2" for="username">Користувач</label>
+        <div class="w3-rest">
+            <input type="text" class="w3-input w3-border" id="username" value="{{ user.username }}" name="username" placeholder="">
+        </div>
+    </div>
+    <div class="w3-row w3-section">
+        <label class="col-sm-2" for="mobile_phone">Телефон</label>
+        <div class="w3-rest">
+            <input type="text" class="w3-input w3-border" id="mobile_phone" value="{{ user.stprofile.mobile_phone }}" name="mobile_phone" placeholder="">
+        </div>
+    </div>
+    <div class="w3-row w3-section">
+        <div class="col-sm-5">
+            <button type="submit" class="w3-button w3-block w3-section w3-blue w3-ripple w3-padding">Оновити</button>
+            <a href="{% url 'myshop:ProductList' %}" class="w3-button w3-block w3-section w3-orange w3-ripple w3-padding" role="button">Скасувати</a>
+
+        </div>
+    </div>
+ </form>
+
+{% endblock content %}

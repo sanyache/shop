@@ -21,16 +21,16 @@ class Status(models.Model):
         verbose_name_plural = 'Статуси замовлення'
 
 class Order(models.Model):
-    user = models.ForeignKey(User, blank=True, null=True, default=None)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    customer_name = models.CharField(max_length=64, blank=True, null=True, default=None)
-    customer_email = models.EmailField(blank=True, null=True, default=None)
-    customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None)
-    customer_address = models.CharField(max_length=128, blank=True, null=True, default=None)
-    comments = models.TextField(blank=True, null=True, default=None)
-    status = models.ForeignKey(Status)
-    created = models.DateTimeField(auto_now_add=True, auto_now=False)
-    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+    user = models.ForeignKey(User, blank=True, null=True, default=None, verbose_name='Користувач')
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Загальна вартість')
+    customer_name = models.CharField(max_length=64, blank=True, null=True, default=None, verbose_name="Ім'я")
+    customer_email = models.EmailField(blank=True, null=True, default=None, verbose_name='Email')
+    customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None, verbose_name='Телефон')
+    customer_address = models.CharField(max_length=128, blank=True, null=True, default=None, verbose_name='Адреса')
+    comments = models.TextField(blank=True, null=True, default=None, verbose_name='Коментар')
+    status = models.ForeignKey(Status, verbose_name='Статус')
+    created = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name='Створено')
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True, verbose_name='Оновлено')
 
     def __unicode__(self):
         return "Замовлення %s%s" %(self.id, self.status.name)
@@ -45,8 +45,8 @@ class Order(models.Model):
 
 class ProductInOrder(models.Model):
     order = models.ForeignKey(Order, blank=True, null=True, default=None)
-    product = models.ForeignKey(Product, blank=True, null=True, default=None)
-    nmb = models.IntegerField(default=1)
+    product = models.ForeignKey(Product, blank=True, null=True, default=None, verbose_name='Назва')
+    nmb = models.IntegerField(default=1, verbose_name='Кількість')
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)#price*nmb
     is_active = models.BooleanField(default=True)

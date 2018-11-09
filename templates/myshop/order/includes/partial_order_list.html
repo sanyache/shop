@@ -1,0 +1,25 @@
+{% for order in orders %}
+        <tr>
+            <td><a href="{% url 'orders:order_edit' order.id %}">{{ forloop.counter }}</a></td>
+            <td>{{ order.user }}</td>
+            <td>{{ order.customer_name }}</td>
+            <td>{{ order.customer_email }}</td>
+            <td>{{ order.customer_phone }}</td>
+            <td>{{ order.total_price }}</td>
+            <td>{{ order.status }}</td>
+            <td>{{ order.created }}</td>
+            <td>{{ order.updated }}</td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Дія
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" >
+                        <li><a href="{% url 'orders:order_edit' order.id %}">Редагувати</a></li>
+                        <li><a href="" class="btn btn-danger js-delete-order" data-url="{% url 'orders:order_delete' order.id %}">Видалити</a></li>
+
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}

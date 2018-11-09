@@ -1,0 +1,26 @@
+{% for product_in_order in products_in_order %}
+                    <tr class="product-in-order">
+                        <td>{{ product_in_order.product.name }}</td>
+                        <td>{{ product_in_order.product.stock }}</td>
+                        <td>
+                            <input value="{{ product_in_order.nmb }}" type="number" class="product-in-order-nmb"
+                                   name="product_in_order.nmb_{{ product_in_order.id }}">
+                        </td>
+                        <td>
+                            <span class="product-in-order-price-per-item">
+                                {{ product_in_order.price_per_item }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="total-product-in-order-amount" data-id="{{ product_in_order.id }}">
+                                {{ product_in_order.total_price }}
+                            </span>
+                        </td>
+                        <td class="checkbox">
+
+                            <input type="checkbox" value="1" {% if  product_in_order.is_active  %} checked="checked" {% endif %}
+                                   name="is-active_{{ product_in_order.id }}" id="is-active_{{ product_in_order.id }}">
+
+                        </td>
+                    </tr>
+{% endfor %}

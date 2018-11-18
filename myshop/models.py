@@ -3,7 +3,8 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.core.urlresolvers import reverse
-
+from django.utils.text import Truncator
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Category(models.Model):
@@ -59,3 +60,19 @@ class Product(models.Model):
 
     def __unicode__(self):
         return u"%s"%(self.name)
+
+class Reply(models.Model):
+    message = models.TextField(max_length=4000, verbose_name='коментар')
+    product = models.ForeignKey(Product, related_name='replies')
+    author = models.ForeignKey(User, related_name='replies')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    parent = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name = 'Коментар'
+        verbose_name_plural = 'Коментарі'
+
+    def __unicode__(self):
+        reply = Truncator(self.message).chars(30)
+        return u"%s"%(reply)

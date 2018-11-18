@@ -29,8 +29,12 @@
             </tbody>
 
         </table>
-        <button data-url="{% url 'orders:product_add' order.id %}" class="js-create-order">Добавити</button>
+        <label>Перерахувати склад </label>
+        <input type="checkbox" value="1" name="stock-update">
+        <br>
+        <button data-url="{% url 'orders:product_add' order.id %}" class="js-create-order">Додати товар</button>
         <button type="submit" class="btn btn-success">Відправити</button>
+        <a class="button" href="{% url 'orders:order_list'  %}">Скасувати</a>
 
     </form>
 <!-- Modal window -->

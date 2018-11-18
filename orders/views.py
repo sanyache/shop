@@ -88,6 +88,7 @@ def order_edit(request, pk):
             order = form.save()
             order.save()
             data = request.POST
+            stock_update = request.POST.get('stock-update')
             for key, value in data.items():
 
                 if key.startswith('product_in_order.nmb_'):
@@ -103,10 +104,11 @@ def order_edit(request, pk):
                     product_in_order.order = order
                     product_in_order.save(force_update=True)
                     # Stock
-                    product_id = product_in_order.product.id
-                    product = Product.objects.get(id=product_id)
-                    product.stock -= int(value)
-                    product.save(force_update=True)
+                    if stock_update:
+                        product_id = product_in_order.product.id
+                        product = Product.objects.get(id=product_id)
+                        product.stock -= int(value)
+                        product.save(force_update=True)
             return redirect('orders:order_list')
     else:
         form = OrderForm(instance=order)

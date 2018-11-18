@@ -26,7 +26,10 @@
         <div class="col-sm-5">
             <button type="submit" class="btn btn-primary">Вхід</button>
             <a href="{% url 'myshop:ProductList' %}" class="btn btn-default" role="button">Скасувати</a>
-            <!--<a href="#">Забули пароль?</a>-->
+            <br>
+            <small>
+                <a href="{% url 'account:password_reset' %}">Забули пароль ?</a>
+            </small>
         </div>
     </div>
  </form>

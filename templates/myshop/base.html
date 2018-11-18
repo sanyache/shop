@@ -27,16 +27,17 @@
 
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'account:my_account' %}">Мій акаунт</a></li>
-                        <li><a href="">Змінити пароль</a></li>
+                        <li><a href="{% url 'account:password_reset' %}">Змінити пароль</a></li>
                         <li class="divider"></li>
                         <li><a href="{% url 'account:logout' %}">Вийти</a></li>
 
                     </ul>
                 </li>
-                <li class="nav-item"><a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+                <li class="nav-item"><a href="{% url 'account:logout' %}"><i class="fas fa-sign-out-alt fa-2x"></i></a></li>
                 {% else %}
-                <li class="nav-item"><a href="{% url 'account:signup' %}">Реєстрація</a></li>
-                <li class="nav-item"><a href="{% url 'account:login' %}"><i class="fas fa-sign-in-alt"></i></a> </li>
+                <li class="nav-item"><a href="{% url 'account:signup' %}"><i class="fas fa-user-plus fa-2x"></i></a></li>
+                <li class="nav-item"><a href="{% url 'social:begin' 'facebook' %}"> <i class="fab fa-facebook-square fa-2x"></i></a></li>
+                <li class="nav-item"><a href="{% url 'account:login' %}"><i class="fas fa-sign-in-alt fa-2x"></i></a> </li>
 
             {% endif %}
 
@@ -52,8 +53,8 @@
       <div class="jumbotron" >
         <div class="container" >
           <h1 class="display-3">Вас вітає магазин Ера !</h1>
-          <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+          <p></p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Дізнатися більше &raquo;</a></p>
         </div>
       </div>
    </div>

@@ -4,12 +4,15 @@
   {{ product.name }}
 {% endblock %}
 {% block content %}
-  <div class="product-detail">
-    <div class="col-sm-4">
-      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image.png'%}{% endif %}" class="img-responsive" width="250" height="300" alt="{{product.name}}">
-    </div>
+  <div class="product-detail ">
+
+      <div class="col-sm-8">
+        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no-image.png'%}{% endif %}" class="img-responsive" width="250" height="300" alt="{{product.name}}">
+      </div>
+
+    <div class="row">
     <div class="col-sm-8">
-      <h1>{{ product.name }}</h1>
+      <h2>{{ product.name }}</h2>
       <h2><a href="#">{{ product.category }}</a></h2>
       <p class="price">
         {{ product.price }} грн.
@@ -18,7 +21,7 @@
         {{ product.description | linebreaks}}
       </span>
     </div>
-    <div>
+    <div class="col-sm-4">
       <form id="form_buying_product" class="form-inline" action="{% url 'orders:basket_adding' %}">{% csrf_token %}
         <div class="form-group">
           <input type="number" class="form-control" id="number" name="number">
@@ -33,7 +36,29 @@
         </div>
       </form>
     </div>
+    </div>
+    <br>
+    <br>
+    <div class="col-sm-4" id="reply_add">
+        <h4>Відгуки про товар</h4> <button data-url="{% url 'myshop:ProductReply' product.id product.slug 0 %}" class="btn btn-primary js-create-reply">Додати</button>
+    </div>
+    <div id="reply_list">
+      {% include 'myshop/product/includes/partial_replay_list.html' %}
+    </div>
   </div>
-{% endblock %}
+
+<!-- Modal window -->
+    <div class="modal fade" id="modal-order">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block extra_js %}
+<script src="{% static 'js/product.js' %}"></script>
+
+{% endblock extra_js %}
 
 

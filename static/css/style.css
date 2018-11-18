@@ -1,4 +1,11 @@
+body{
+    background-color: #e6f2ff;
 
+}
+h1{
+    margin-bottom: 6.5rem;
+    margin-top: -60px;
+}
 .basket-container{
     position: relative;
     width: 400px;
@@ -53,9 +60,12 @@
 .form-error{
     color: red;
 }
+.form-control{
+    width: auto;
+}
 
 .jumbotron{
-    background-image: url('varennya.jpg');
+    background-image: url('Slider_ICYII.jpg');
     background-size: cover;
     color: #002966;
     width: 100%;
@@ -68,7 +78,7 @@
 .modal-content {
     margin: auto;
     display: block;
-    width: 80%;
+    width: 100%;
     max-width: 700px;
     background-color: #DCDCDC;
 }
@@ -85,3 +95,6 @@
 
 }
 
+#id_message{
+    width: 350px;
+}

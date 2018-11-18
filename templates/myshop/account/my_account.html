@@ -5,10 +5,10 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock extra_css %}
-{% block title %}Мій акаунт {{ user.username }}{% endblock title %}
+{% block title %}{% endblock title %}
 {% block content %}
- <br/>
- <br/>
+<br>
+<br>
  <form  action="{% url 'account:my_account' %}" method="post" class="w3-container w3-card-4 w3-light-grey w3-text-blue " >
     {% csrf_token %}
     <h2 class="w3-center">Мій акакунт {{ user.username }}</h2>

@@ -13,7 +13,7 @@
                         <div class="col-lg-4">
                             <label>Ім'я</label>
                             <input type="text" name="{{ form.name.html_name }}" class="form-control"
-                                value="{{ request.POST.name }}">
+                               {% if user.is_authenticated %} value="{{ user.username }}" {% else %} value="{{ request.POST.username }}" {% endif %}>
                             <span class="form-error">{{ form.name.errors }}</span>
                         </div>
 
@@ -22,7 +22,7 @@
                         <div class="col-lg-4">
                             <label>Телефон</label>
                             <input type="text" name="{{ form.phone.html_name }}" class="form-control"
-                                value="{{ request.POST.phone }}">
+                                {% if user.is_authenticated %} value= "{{ user.stprofile.mobile_phone }}" {% else %} value= "{{ request.POST.phone }}" {% endif %}>
                             <span class="form-error">{{ form.phone.errors }}</span>
                         </div>
                     </div>

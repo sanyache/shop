@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('myshop.urls', namespace='myshop')),
     url(r'^order/', include('orders.urls', namespace='orders' )),
-    url(r'^account/', include('accounts.urls', namespace='account')),
+    url(r'^accounts/', include('accounts.urls', namespace='account')),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
 ]
 
 if settings.DEBUG:

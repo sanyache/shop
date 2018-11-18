@@ -4,12 +4,13 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.views.generic import CreateView, UpdateView
-from .models import Category, Product, Brand
+from .models import Category, Product, Brand, Reply
 from django.utils.text import slugify
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from .util import paginate
+from .forms import ReplyForm
 import json
 
 # Create your views here.
@@ -63,11 +64,12 @@ def ProductDetail(request, id, slug):
     session_key = request.session.session_key
     if not session_key:
         request.session.cycle_key()
-    return render(request, 'myshop/product/detail.html', {'product': product})
+    replies = Reply.objects.filter(product=product)
+    return render(request, 'myshop/product/detail.html', {'product': product, 'replies': replies})
 
 class CreateProduct(CreateView):
     model = Product
-    fields = ('category', 'brand', 'name', 'image', 'description', 'price', 'stock', 'available',    )
+    fields = ('category', 'brand', 'name', 'image', 'description', 'price', 'stock', 'available',)
     template_name = 'myshop/product/create_product.html'
 
     def form_valid(self, form):
@@ -117,4 +119,24 @@ def product_search(request):
         data['form_is_valid'] = True
         data['html_order_list'] = render_to_string('myshop/product/includes/partial_stock_list.html', {'products': products})
 
+    return JsonResponse(data)
+
+def reply_product(request, pk, slug, id):
+    product = get_object_or_404(Product, pk=pk, slug=slug)
+    data = dict()
+    if request.method == 'POST':
+        form = ReplyForm(request.POST)
+        if form.is_valid():
+            reply, created = Reply.objects.get_or_create(product=product, message=form.cleaned_data.get('message'), author=request.user)
+            if int(id) > 0:
+                reply.parent = int(id)
+                reply.save()
+            replies = Reply.objects.filter(product=product)
+            data['form_is_valid'] = True
+
+            data['html_order_list'] = render_to_string('myshop/product/includes/partial_replay_list.html', {'replies': replies, 'product': product})
+    else:
+        form = ReplyForm
+        context = {'form': form, 'product': product}
+        data['html_form'] = render_to_string('myshop/product/reply_add.html', context, request)
     return JsonResponse(data)

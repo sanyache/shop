@@ -10,13 +10,13 @@
     <h2>Реєстрація</h2>
     <form method="post" novalidate>
         {% csrf_token %}
-        {{ form.as_p }}
+        {% include 'myshop/product/includes/partial_form.html' %}
 
         <button type="submit" class="btn btn-primary">Створити акаунт</button>
         <a href="{% url 'myshop:ProductList' %}" class="btn btn-default" role="button">Скасувати</a>
     </form>
     <div class="text-center">
-        вже є акаунт <a href="#">Log in</a>
+        вже є акаунт <a href="{% url 'account:login' %}">Log in</a>
 
     </div>
 </div>

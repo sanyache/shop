@@ -71,6 +71,7 @@ $(function(){
   // Create product 
   $(".js-create-order").click(loadForm);
   $("#modal-order").on("submit", ".js-order-create-form", saveForm);
+  
   //Delete order
   $("#order-table").on("click", ".js-delete-order", loadForm);
   $("#modal-order").on("submit", ".js-order-delete-form", saveForm);

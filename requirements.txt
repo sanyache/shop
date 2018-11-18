@@ -1,2 +1,3 @@
 Pillow
 django-widget-tweaks
+social-auth-app-django

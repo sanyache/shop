@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^(?P<category_slug>[-\w]+)/brand/(?P<brand_slug>[-\w]+)/$', views.ProductListByBrand, name='ProductListByBrand'),
     url(r'^stock/(?P<category_slug>[-\w]+)/brand/(?P<brand_slug>[-\w]+)/$', views.StockListByBrand, name='StockListByBrand'),
     url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.ProductDetail, name='ProductDetail'),
+    url(r'^(?P<pk>\d+)/(?P<slug>[-\w]+)/reply/(?P<id>\d+)/$', views.reply_product, name='ProductReply'),
     url(r'^product_edit/(?P<id>\d+)/(?P<slug>[-\w]+)/$', ProductEdit.as_view(), name='ProductEdit'),
     url(r'^product_delete/(?P<pk>\d+)/(?P<slug>[-\w]+)/$', views.ProductDelete, name='ProductDelete')
 ]

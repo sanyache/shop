@@ -20,7 +20,7 @@
     </ul>
   </div>
   <div id="main" class="product_list products">
-    <h1>{% if category %}{{ category.name }}{% else %}Товари{% endif %}</h1>
+    <h2>{% if category %}{{ category.name }}{% else %}Товари{% endif %}</h2>
     <div class="items row">
       {% for product in products %}
         <div class="item col-md-3">

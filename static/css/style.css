@@ -6,6 +6,12 @@ h1{
     margin-bottom: 6.5rem;
     margin-top: -60px;
 }
+.fas{
+    color: #DADADA;
+}
+.fab{
+    color: #DADADA;
+}
 .basket-container{
     position: relative;
     width: 400px;
@@ -13,8 +19,10 @@ h1{
 
 }
 .basket{
-    color:black;
+    color: #DADADA;
 }
+
+
 .basket-items{
     position: absolute;
     top: 50px;

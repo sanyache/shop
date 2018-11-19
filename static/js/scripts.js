@@ -87,7 +87,7 @@ $(document).ready(function(){
         basketUpdating(product_id, nmb, is_delete=false);
 
     });
-    $('img').click(function(){
+    $('.increace').click(function(){
         var modal = $('#myModal');
         var modalImg = document.getElementById('img00');
         var captionText = document.getElementById('caption');

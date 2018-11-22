@@ -4,10 +4,12 @@ from __future__ import unicode_literals
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
+from django.core.mail import send_mail
 from .models import ProductInBasket, ProductInOrder, Order
 from myshop.models import Product
 from .forms import CheckContactForm, OrderForm, ProductInOrderForm
 from django.contrib.auth.models import User
+from shop.settings import ADMIN_EMAIL
 import json
 
 # Create your views here.
@@ -51,9 +53,9 @@ def basket_adding(request):
 def checkout(request):
     session_key = request.session.session_key
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key, is_active=True)
-    form = CheckContactForm(request.POST or None)
-    if request.POST :
 
+    if request.POST :
+        form = CheckContactForm(request.POST or None)
         if form.is_valid():
             data = request.POST
             name = data.get('name', '123')
@@ -61,6 +63,7 @@ def checkout(request):
             user, created = User.objects.get_or_create(username=phone, defaults={'first_name': name})
 
             order = Order.objects.create(user=user, customer_name=name, customer_phone=phone, status_id=1)
+            send_mail('new order', 'отримано новий заказ з номеру {0}'.format(phone), ADMIN_EMAIL, ['craftjam18@gmail.com',])
             for key, value in data.items():
                 if key.startswith('product_in_basket.nmb_'):
                     product_in_basket_id = key.split('product_in_basket.nmb_')[1]
@@ -72,7 +75,10 @@ def checkout(request):
                     ProductInOrder.objects.create(product=product_in_basket.product, nmb=product_in_basket.nmb,
                                                   price_per_item=product_in_basket.price_per_item,
                                                   total_price=product_in_basket.total_price, order=order)
-    return render(request, 'myshop/checkout.html', locals())
+            return redirect('myshop:ProductList')
+    else:
+        form = CheckContactForm()
+        return render(request, 'myshop/checkout.html', locals())
 
 def order_list(request):
     orders = Order.objects.all().order_by('-updated')

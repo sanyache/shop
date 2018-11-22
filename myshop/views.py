@@ -76,7 +76,6 @@ class CreateProduct(CreateView):
 
         model = form.save(commit=False)
         model.slug = slugify(model.name)
-        #model.image = form.cleaned_data['image']
         model.save()
         return redirect('myshop:CreateProduct')
 

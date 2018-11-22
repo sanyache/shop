@@ -17,11 +17,13 @@
                 <br></small> {% endif %}
 
                 {{ reply.message }}
+                {% if user.is_authenticated %}
                 <div class="text-right answer">
                 <small>
                     <button data-url="{% url 'myshop:ProductReply' product.id product.slug reply.id %}" class="btn btn-primary js-create-reply">Відповісти</button>
                 </small>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div>

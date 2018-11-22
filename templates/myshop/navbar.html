@@ -47,11 +47,11 @@
     </ul>
 
   </div>
-    <div>
+    <div class="signup" style="font-size:17px;">
                <ul class="navbar-nav">
                 {% if user.is_authenticated %}
 
-                <li class="nav-item dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-user"></i> {{user.username}}<span class="caret"></span> </a>
+                <li class="nav-item dropdown" style="margin-right: 7px;"><a class="dropdown" data-toggle="dropdown" href="#" style="color: white;"> {{user.username}}<span class="caret"></span> </a>
 
                     <ul class="dropdown-menu">
                         <li><a href="{% url 'account:my_account' %}">Мій акаунт</a></li>
@@ -74,7 +74,7 @@
     <div class="nav navbar-nav navbar-right">
 
            <div class="basket-container">
-               <a href="{% url 'orders:checkout' %}" class="basket"><i class="fas fa-shopping-cart"></i><span id="basket_total_nmb">
+               <a href="{% url 'orders:checkout' %}" class="basket"><i class="fas fa-shopping-cart fa-2x"></i><span id="basket_total_nmb">
                    {% if products_total_nmb %}
                     ({{ products_total_nmb }})
                    {% else %}

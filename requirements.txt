@@ -1,3 +1,5 @@
+Django==1.11
 Pillow
+MySQL-python
 django-widget-tweaks
 social-auth-app-django

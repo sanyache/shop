@@ -12,6 +12,9 @@ h1{
 .fab{
     color: #DADADA;
 }
+.signup{
+    margin-right: 30px;
+}
 .basket-container{
     position: relative;
     width: 400px;
@@ -22,7 +25,9 @@ h1{
     color: #DADADA;
 }
 
-
+#basket_total_nmb{
+    font-size: 23px;
+}
 .basket-items{
     position: absolute;
     top: 50px;
